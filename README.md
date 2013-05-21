@@ -21,3 +21,30 @@ CREATE TABLE `nuke_sf_slider` (
 ) ENGINE=MyISAM;
 </code></pre>
 
+###Mainfile.php Edit
+
+Before the closing ?> add
+
+<pre><code>function chop_word($val, $cut_len) {
+    $tot_len = strlen($val);
+    $cut_str = substr($val, 0, $cut_len);
+    $len = strlen($cut_str);
+    for($i=0;$i < $len;$i++) {
+        for($i=0;$i < $len;$i++) {
+            if(ord($val[$i]) > 127) $hanlen++;
+            else $englen++;
+        }
+        $cut_gap = $hanlen % 2;
+        if($cut_gap == 1){
+            $hanlen--;
+        }
+        $length=$hanlen + $englen;
+
+        if($tot_len > $length){
+            return substr($val, 0, $length)."...";
+        } else {
+            return substr($val, 0, $length);
+        }
+    }
+}</code></pre>
+
